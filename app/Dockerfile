@@ -1,4 +1,4 @@
-FROM python:3
+FROM python:3.9.7-slim
 
 RUN pip install django==3.2
 

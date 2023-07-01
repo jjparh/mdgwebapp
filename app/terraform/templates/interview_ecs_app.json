@@ -1,0 +1,27 @@
+{
+    "requiresCompatibilities": [
+        "FARGATE"
+    ],
+    "family": "service",
+    "containerDefinitions": [
+        {
+            "name": "interview_ecs_app",
+            "image": "827519677757.dkr.ecr.eu-west-2.amazonaws.com/pythonproject:latest",
+            "essential": true,
+            "cpu": "1024",
+            "memory":"2048",
+            "portMappings": [
+              {
+                "containerPort": 8000,
+                "hostPort"     : 8000
+              }
+            ]
+  
+        }
+    ],
+    "volumes": [],
+    "networkMode": "awsvpc",
+    "memory": "2048",
+    "cpu": "1024",
+    "executionRoleArn": "arn:aws:iam::827519677757:role/mdgecstaskrole"
+  }
