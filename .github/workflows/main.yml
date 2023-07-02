@@ -14,7 +14,7 @@ env:
   ECS_CLUSTER: interview-ecs-cluster                 # set this to your Amazon ECS cluster name
   ECS_TASK_DEFINITION: terraform/templates/interview_ecs_app.json # set this to the path to your Amazon ECS task definition
                                                # file, e.g. .aws/task-definition.json
-  CONTAINER_NAME: interviewproject           # set this to the name of the container in the
+  CONTAINER_NAME: interview_ecs_app           # set this to the name of the container in the
                                                # containerDefinitions section of your task definition    
 
 permissions:
