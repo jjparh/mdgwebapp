@@ -23,5 +23,5 @@
     "networkMode": "awsvpc",
     "memory": "2048",
     "cpu": "1024",
-    "executionRoleArn": "arn:aws:iam::827519677757:role/mdgecstaskrole"
+    "executionRoleArn": "arn:aws:iam::827519677757:role/interviewtaskecsrole"
   }
