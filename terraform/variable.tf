@@ -1,8 +1,8 @@
-variable "aws_region" {
-  description = "AWS region."
-  default     = "eu-west-2"
-  type        = string
-}
+#variable "aws_region" {
+#  description = "AWS region."
+#  default     = "eu-west-2"
+#  type        = string
+#}
 
 #variable "access_key" {
 #  type = string
