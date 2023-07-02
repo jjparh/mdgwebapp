@@ -2,13 +2,11 @@
 A simple todo-list app built with django.
 
 ### Setup
-To get this repository, run the following command inside your git enabled terminal
+Clone this repo
 ```bash
 git clone hhttps://github.com/jjparh/mdgwebapp.git
 ```
-You will need django to be installed in you computer to run this app. Head over to https://www.djangoproject.com/download/ for the download guide
-
-Once you have downloaded django, go to the cloned repo directory and run the following command
+Install django and go to the cloned repo directory and run the following command
 
 ```bash
 python manage.py makemigrations
@@ -34,3 +32,37 @@ python manage.py runserver
 
 Once the server is hosted, head over to http://127.0.0.1:8000/todos/ for the App.
 
+
+###### AWS Deployment Diagram ######
+![Alt text](staticfiles/css/awsdiagram.jpg)
+
+###### APP Workflow #####
+
+ECS-with-Terraform
+Tasks:
+
+Deploy a Django Application on AWS ECS Fargate Using Terraform.
+
+The ECS Fargate should be deployed on Private Subenet.
+Image should be read from ECR.
+Create a GitHub workflow to run Terraform code.
+
+List of created resources
+
+VPC:
+Public Subnets
+Private Subnets
+Internet Gateway
+NAT Gateway
+Route Tables
+Security Groups
+
+IAM Role
+
+Application Load Balancer
+
+Elastic Container Registry
+
+ECS Cluster
+ECS Service
+ECS tasks
