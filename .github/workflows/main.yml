@@ -12,7 +12,7 @@ env:
   ECR_REPOSITORY: interviewproject             # 600023384173.dkr.ecr.ap-south-1.amazonaws.com/demo_ecs_app           # set this to your Amazon ECR repository name
   ECS_SERVICE: interview_ecs_svc                 # set this to your Amazon ECS service name
   ECS_CLUSTER: interview-ecs-cluster                 # set this to your Amazon ECS cluster name
-  ECS_TASK_DEFINITION: templates/interview_ecs_app.json # set this to the path to your Amazon ECS task definition
+  ECS_TASK_DEFINITION: terraform/templates/interview_ecs_app.json # set this to the path to your Amazon ECS task definition
                                                # file, e.g. .aws/task-definition.json
   CONTAINER_NAME: interview_ecs_app           # set this to the name of the container in the
                                                # containerDefinitions section of your task definition    
