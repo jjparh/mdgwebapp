@@ -26,7 +26,7 @@ resource "aws_ecs_task_definition" "interview_ecs_app_def" {
   container_definitions = jsonencode([
     {
       name   = var.aws_ecr_repository
-      image  = "827519677757.dkr.ecr.eu-west-2.amazonaws.com/pythonproject:latest"
+      image  = "827519677757.dkr.ecr.eu-west-2.amazonaws.com/interviewproject:latest"
       cpu    = var.fargate_cpu
       memory = var.fargate_memory
       portMappings = [
