@@ -1,6 +1,6 @@
 ---
 
-name: 'Terraform'
+name: Terraform
 
 on:
   push:
@@ -43,8 +43,12 @@ jobs:
         aws-region: ${{ env.AWS_REGION }}
 
     # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
+    #- name: Setup Terraform
+    #  uses: hashicorp/setup-terraform@v1
+    #  with:
+    #      terraform_version: 1.4.2
     - name: terraform initialization 
-      run: cd terraform/ && terraform inits
+      run: cd terraform/ && terraform init
 
     # Checks that all Terraform configuration files adhere to a canonical format
     - name: Terraform Format
