@@ -57,7 +57,7 @@ variable "environment" {
 variable "ecs_iam_role_name" {
   type        = string
   description = "ECS IAM Role"
-  default     = "mdgecstaskrole"
+  default     = "interviewtaskecsrole"
 }
 
 variable "aws_ecs_cluster_name" {

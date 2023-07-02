@@ -6,7 +6,7 @@ resource "aws_alb" "main" {
 }
 
 resource "aws_alb_target_group" "app" {
-  name        = "demo-ecs-target-group"
+  name        = "interview-ecs-target-group"
   port        = 80
   protocol    = "HTTP"
   vpc_id      = module.vpc.vpc_id
