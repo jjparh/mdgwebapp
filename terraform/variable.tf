@@ -4,13 +4,13 @@ variable "aws_region" {
   type        = string
 }
 
-variable "access_key" {
-  type = string
-}
+#variable "access_key" {
+#  type = string
+#}
 
-variable "secret_key" {
-  type = string
-}
+#variable "secret_key" {
+#  type = string
+#}
 
 variable "aws_vpc_name" {
   type        = string
