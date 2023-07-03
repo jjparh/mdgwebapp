@@ -135,4 +135,10 @@ variable "ecs_task_execution_role_name" {
   default = "interviewtaskecsrole"
 }
 
+variable "ssh_pubkey_file" {
+  description = "Path to an SSH public key"
+  default     = "~/.ssh/id_rsa.pub"
+}
+
+
 
