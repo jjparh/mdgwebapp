@@ -81,13 +81,13 @@ variable "aws_ecs_task_def_fam" {
 variable "fargate_cpu" {
   type        = number
   description = "cpus"
-  default     = 1048
+  default     = 2048
 }
 
 variable "fargate_memory" {
   type        = number
   description = "memory"
-  default     = 2096
+  default     = 4096
 }
 
 variable "aws_ecs_service_name" {
