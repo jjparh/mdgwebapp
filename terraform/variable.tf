@@ -99,7 +99,7 @@ variable "aws_ecs_service_name" {
 variable "app_port" {
   type        = number
   description = "application container port"
-  default     = 8000
+  default     = 80
 }
 
 variable "app_count" {
