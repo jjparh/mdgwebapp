@@ -116,7 +116,7 @@ variable "ecs_alb_name" {
 
 variable "health_check_path" {
   type    = string
-  default = "/todo"
+  default = "/todos/"
 }
 
 variable "aws_sg_name" {
