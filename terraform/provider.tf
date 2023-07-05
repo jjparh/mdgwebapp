@@ -16,7 +16,7 @@ provider "aws" {
 terraform {
   backend "s3" {
     bucket = "mdgtask"
-    key    = "mdgtask/terraform/remote/mdgintapp/terraform.tfstate"
+    key    = "mdgtask/terraform/remote/mdglogs/terraform.tfstate"
     region = "eu-west-2"
     dynamodb_table = "mdgtaskdynamodb"
   }
