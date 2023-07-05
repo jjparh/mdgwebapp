@@ -4,7 +4,7 @@ name: Terraform
 
 on:
   push:
-    branches: [ main, logs ]
+    branches: [ main, asg ]
   pull_request:
   
 env:
