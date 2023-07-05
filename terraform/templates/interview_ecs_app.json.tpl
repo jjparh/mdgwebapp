@@ -8,7 +8,7 @@
         "logDriver": "awslogs",
         "options": {
           "awslogs-group": "/ecs/int-app",
-          "awslogs-region": "${aws_region}",
+          "awslogs-region": "var.aws_region",
           "awslogs-stream-prefix": "ecs"
         }
     },
