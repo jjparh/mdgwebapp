@@ -1,7 +1,7 @@
 [
   {
     "name": "$(aws_ecr_repository)",
-    "image": "${app_image}:${tag}",
+    "image": "${app_image}",
     "cpu": ${fargate_cpu},
     "memory": ${fargate_memory},
     "logConfiguration": {
