@@ -1,35 +1,35 @@
-data "aws_iam_policy_document" "ecs_task_execution_role" {
-  version = "2012-10-17"
-  statement {
-    sid     = ""
-    effect  = "Allow"
-    actions = ["sts:AssumeRole"]
-
-    principals {
-      type        = "Service"
-      identifiers = ["ecs-tasks.amazonaws.com"]
-    }
-  }
-}
+#data "aws_iam_policy_document" "ecs_task_execution_role" {
+#  version = "2012-10-17"
+#  statement {
+#    sid     = ""
+#    effect  = "Allow"
+#    actions = ["sts:AssumeRole"]
+#
+#    principals {
+#      type        = "Service"
+#      identifiers = ["ecs-tasks.amazonaws.com"]
+#    }
+#  }
+#}
 
 # ECS task execution role
-resource "aws_iam_role" "ecs_task_execution_role" {
-  name               = var.ecs_task_execution_role_name
-  assume_role_policy = data.aws_iam_policy_document.ecs_task_execution_role.json
-}
+#resource "aws_iam_role" "ecs_task_execution_role" {
+#  name               = var.ecs_task_execution_role_name
+#  assume_role_policy = data.aws_iam_policy_document.ecs_task_execution_role.json
+#}
 
 # ECS task execution role policy attachment
-resource "aws_iam_role_policy_attachment" "ecs_task_execution_role" {
-  role       = aws_iam_role.ecs_task_execution_role.name
-  policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
-}
+#resource "aws_iam_role_policy_attachment" "ecs_task_execution_role" {
+#  role       = aws_iam_role.ecs_task_execution_role.name
+#  policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
+#}
 
 
 
 ####################################################
 
 resource "aws_iam_role" "int_ecs_service" {
-  name = "int_ecs-service"
+  name = var.ecs_task_execution_role_name
 
   assume_role_policy = <<EOF
 {
@@ -93,6 +93,12 @@ data "aws_iam_policy_document" "int_ecs_service_standard" {
       "ecs:UpdateContainerInstancesState",
       "ecs:Submit*",
       "logs:CreateLogGroup",
+      "logs:CreateLogStream",
+      "logs:PutLogEvents",
+      "ecr:GetAuthorizationToken",
+      "ecr:BatchCheckLayerAvailability",
+      "ecr:GetDownloadUrlForLayer",
+      "ecr:BatchGetImage",
       "logs:CreateLogStream",
       "logs:PutLogEvents"
     ]

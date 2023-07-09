@@ -6,7 +6,7 @@
     "containerDefinitions": [
         {
             "name": "interviewproject",
-            "image": "827519677757.dkr.ecr.eu-west-2.amazonaws.com/interviewproject",
+            "image": "827519677757.dkr.ecr.eu-west-2.amazonaws.com/pythonproject",
             "essential": true,
             "cpu": "1024",
             "memory":"2048",

@@ -17,7 +17,7 @@ data "template_file" "interview_ecs_app" {
 resource "aws_ecs_task_definition" "interview_ecs_app_def" {
 
   family                   = var.aws_ecs_task_def_fam
-  execution_role_arn       = aws_iam_role.ecs_task_execution_role.arn
+  execution_role_arn       = aws_iam_role.int_ecs_service.arn
   network_mode             = "awsvpc"
   requires_compatibilities = ["FARGATE"]
   cpu                      = var.fargate_cpu
@@ -26,7 +26,7 @@ resource "aws_ecs_task_definition" "interview_ecs_app_def" {
   container_definitions = jsonencode([
     {
       name   = var.aws_ecr_repository
-      image  = "827519677757.dkr.ecr.eu-west-2.amazonaws.com/interviewproject"
+      image  = "827519677757.dkr.ecr.eu-west-2.amazonaws.com/pythonproject"
       cpu    = var.fargate_cpu
       memory = var.fargate_memory
       portMappings = [
