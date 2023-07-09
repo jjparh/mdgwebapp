@@ -1,87 +1,40 @@
-resource "aws_appautoscaling_target" "target" {
-  service_namespace  = "ecs"
-  resource_id        = "service/${aws_ecs_cluster.ecs-cluster.name}/${aws_ecs_service.main.name}"
+
+resource "aws_appautoscaling_target" "mdgapp_to_target" {
+  max_capacity = 5
+  min_capacity = 1
+  resource_id = "service/${aws_ecs_cluster.ecs-cluster.name}/${aws_ecs_service.main.name}"
   scalable_dimension = "ecs:service:DesiredCount"
-  min_capacity       = 2
-  max_capacity       = 4
+  service_namespace = "ecs"
 }
 
-# Automatically scale capacity up by one
-resource "aws_appautoscaling_policy" "up" {
-  name               = "int_scale_up"
-  service_namespace  = "ecs"
-  resource_id        = "service/${aws_ecs_cluster.ecs-cluster.name}/${aws_ecs_service.main.name}"
-  scalable_dimension = "ecs:service:DesiredCount"
+resource "aws_appautoscaling_policy" "mdgapp_to_memory" {
+  name               = "mdgapp-to-memory"
+  policy_type        = "TargetTrackingScaling"
+  resource_id        = aws_appautoscaling_target.mdgapp_to_target.resource_id
+  scalable_dimension = aws_appautoscaling_target.mdgapp_to_target.scalable_dimension
+  service_namespace  = aws_appautoscaling_target.mdgapp_to_target.service_namespace
 
-  step_scaling_policy_configuration {
-    adjustment_type         = "ChangeInCapacity"
-    cooldown                = 60
-    metric_aggregation_type = "Maximum"
-
-    step_adjustment {
-      metric_interval_lower_bound = 0
-      scaling_adjustment          = 1
+  target_tracking_scaling_policy_configuration {
+    predefined_metric_specification {
+      predefined_metric_type = "ECSServiceAverageMemoryUtilization"
     }
-  }
 
-  depends_on = [aws_appautoscaling_target.target]
+    target_value       = 80
+  }
 }
 
-# Automatically scale capacity down by one
-resource "aws_appautoscaling_policy" "down" {
-  name               = "int_scale_down"
-  service_namespace  = "ecs"
-  resource_id        = "service/${aws_ecs_cluster.ecs-cluster.name}/${aws_ecs_service.main.name}"
-  scalable_dimension = "ecs:service:DesiredCount"
+resource "aws_appautoscaling_policy" "mdgapp_to_cpu" {
+  name = "mdgapp-to-cpu"
+  policy_type = "TargetTrackingScaling"
+  resource_id = aws_appautoscaling_target.mdgapp_to_target.resource_id
+  scalable_dimension = aws_appautoscaling_target.mdgapp_to_target.scalable_dimension
+  service_namespace = aws_appautoscaling_target.mdgapp_to_target.service_namespace
 
-  step_scaling_policy_configuration {
-    adjustment_type         = "ChangeInCapacity"
-    cooldown                = 60
-    metric_aggregation_type = "Maximum"
-
-    step_adjustment {
-      metric_interval_upper_bound = 0
-      scaling_adjustment          = -1
+  target_tracking_scaling_policy_configuration {
+    predefined_metric_specification {
+      predefined_metric_type = "ECSServiceAverageCPUUtilization"
     }
+
+    target_value = 60
   }
-
-  depends_on = [aws_appautoscaling_target.target]
-}
-
-# CloudWatch alarm that triggers the autoscaling up policy
-resource "aws_cloudwatch_metric_alarm" "service_cpu_high" {
-  alarm_name          = "int_cpu_utilization_high"
-  comparison_operator = "GreaterThanOrEqualToThreshold"
-  evaluation_periods  = "2"
-  metric_name         = "CPUUtilization"
-  namespace           = "AWS/ECS"
-  period              = "60"
-  statistic           = "Average"
-  threshold           = "60"
-
-  dimensions = {
-    ClusterName = aws_ecs_cluster.ecs-cluster.name
-    ServiceName = aws_ecs_service.main.name
-  }
-
-  alarm_actions = [aws_appautoscaling_policy.up.arn]
-}
-
-# CloudWatch alarm that triggers the autoscaling down policy
-resource "aws_cloudwatch_metric_alarm" "service_cpu_low" {
-  alarm_name          = "int_cpu_utilization_low"
-  comparison_operator = "LessThanOrEqualToThreshold"
-  evaluation_periods  = "2"
-  metric_name         = "CPUUtilization"
-  namespace           = "AWS/ECS"
-  period              = "60"
-  statistic           = "Average"
-  threshold           = "50"
-
-  dimensions = {
-    ClusterName = aws_ecs_cluster.ecs-cluster.name
-    ServiceName = aws_ecs_service.main.name
-  }
-
-  alarm_actions = [aws_appautoscaling_policy.down.arn]
 }
